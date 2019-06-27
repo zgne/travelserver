@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var nodemailer = require('nodemailer');
 
 var Mongoose = {
 	url: 'mongodb://localhost:27017/travel',
@@ -12,7 +13,23 @@ var Mongoose = {
 		})
 	}
 };
-
+var Email = {
+	config: {
+		host: 'smtp.qq.com',
+		port: 587,
+		auth: {
+			user: '1169264363@qq.com',
+			pass: 'zvcqngfhjltgbaac'
+		}
+	},
+	get transporter(){
+		return nodemailer.createTransport(this.config);
+	},
+	get verify(){
+		return Math.random().toString().substring(2,6)
+	}
+};
 module.exports = {
-	Mongoose
+	Mongoose,
+	Email,
 };
